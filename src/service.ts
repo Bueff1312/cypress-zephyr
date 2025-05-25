@@ -16,6 +16,7 @@ export class Service {
   private readonly authorizationToken: string;
   private readonly projectKey: string;
   private readonly testCycle: TestCycle | undefined;
+  private readonly autoCreateTestCases: boolean;
   private readonly url = 'https://api.zephyrscale.smartbear.com/v2';
   private readonly defaultRunName = `Cypress run - [${new Date().toUTCString()}]`;
 
@@ -23,10 +24,11 @@ export class Service {
     this.projectKey = options.projectKey;
     this.authorizationToken = options.authorizationToken!;
     this.testCycle = options.testCycle;
+    this.autoCreateTestCases = options.autoCreateTestCases === 'true';
   }
 
   async createTestCycle(testResults: PathLike) {
-    const url = `${this.url}/automations/executions/custom?projectKey=${this.projectKey}&autoCreateTestCases=false`;
+    const url = `${this.url}/automations/executions/custom?projectKey=${this.projectKey}&autoCreateTestCases=${this.autoCreateTestCases}`;
     const data = new FormData();
     const testCycleDefault = {
       name: this.defaultRunName,

@@ -36,22 +36,31 @@ function getZephyrOptions(results: CypressCommandLine.CypressRunResult): Service
     results.config.reporter === 'cypress-multi-reporters' &&
     results.config.reporterOptions.reporterEnabled.includes('cypress-zephyr')
   ) {
+    const zephyrReporterOptions = results.config.reporterOptions.cypressZephyrReporterOptions;
     return {
-      projectKey: results.config.reporterOptions.cypressZephyrReporterOptions.projectKey,
-      authorizationToken: results.config.reporterOptions.cypressZephyrReporterOptions.authorizationToken,
-      testCycle: results.config.reporterOptions.cypressZephyrReporterOptions.testCycle,
-      autoCreateTestCases: results.config.reporterOptions.cypressZephyrReporterOptions.autoCreateTestCases,
-      nodeInternalTlsRejectUnauthorized:
-        results.config.reporterOptions.cypressZephyrReporterOptions.nodeInternalTlsRejectUnauthorized,
+      projectKey: zephyrReporterOptions.projectKey,
+      authorizationToken: zephyrReporterOptions.authorizationToken,
+      testCycle: zephyrReporterOptions.testCycle,
+      autoCreateTestCases: zephyrReporterOptions.autoCreateTestCases,
+      nodeInternalTlsRejectUnauthorized: zephyrReporterOptions.nodeInternalTlsRejectUnauthorized,
+      // New test plan options
+      createTestPlan: zephyrReporterOptions.createTestPlan,
+      testPlanName: zephyrReporterOptions.testPlanName,
+      testPlanFolderId: zephyrReporterOptions.testPlanFolderId,
     };
   }
 
+  const reporterOptions = results.config.reporterOptions;
   return {
-    projectKey: results.config.reporterOptions.projectKey,
-    authorizationToken: results.config.reporterOptions.authorizationToken,
-    testCycle: results.config.reporterOptions.testCycle,
-    autoCreateTestCases: results.config.reporterOptions.autoCreateTestCases,
-    nodeInternalTlsRejectUnauthorized: results.config.reporterOptions.nodeInternalTlsRejectUnauthorized,
+    projectKey: reporterOptions.projectKey,
+    authorizationToken: reporterOptions.authorizationToken,
+    testCycle: reporterOptions.testCycle,
+    autoCreateTestCases: reporterOptions.autoCreateTestCases,
+    nodeInternalTlsRejectUnauthorized: reporterOptions.nodeInternalTlsRejectUnauthorized,
+    // New test plan options
+    createTestPlan: reporterOptions.createTestPlan,
+    testPlanName: reporterOptions.testPlanName,
+    testPlanFolderId: reporterOptions.testPlanFolderId,
   };
 }
 

@@ -14,7 +14,19 @@ export type ServiceOptions = {
   testCycle: TestCycle;
   autoCreateTestCases: 'true' | 'false';
   nodeInternalTlsRejectUnauthorized: '0' | '1';
+  createTestPlan?: boolean;
+  testPlanName?: string;
+  testPlanFolderId?: number;
 };
+
+export interface TestPlan {
+  id: number;
+  key: string;
+  projectKey: string;
+  name: string;
+  description?: string;
+  folderId?: number;
+}
 
 export type TestCycle = {
   name: string;
